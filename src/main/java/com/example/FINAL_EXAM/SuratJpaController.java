@@ -27,6 +27,10 @@ public class SuratJpaController implements Serializable {
     }
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.example_FINAL_EXAM_jar_0.0.1-SNAPSHOTPU");
 
+    SuratJpaController() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
