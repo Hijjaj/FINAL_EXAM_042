@@ -44,6 +44,7 @@ public class MyController {
         String feedback = "Do Nothing";
             ObjectMapper mapper = new ObjectMapper();
             data = mapper.readValue(datasend.getBody(), Surat.class);
+            //coba fungsi try, jika gagal tampilkan catch
         try {
             control.create(data);
             feedback = data.getJudul() + "Saved";
@@ -58,6 +59,7 @@ public class MyController {
         String feedback = "Do Nothing";
             ObjectMapper mapper = new ObjectMapper();
             data = mapper.readValue(datasend.getBody(), Surat.class);
+            //coba fungsi try, jika gagal tampilkan catch
         try {
             control.edit(data);
             feedback = data.getJudul() + "Edited";
@@ -73,9 +75,11 @@ public class MyController {
         String feedback = "Do Nothing";
             ObjectMapper mapper = new ObjectMapper();
             data = mapper.readValue(datasend.getBody(), Surat.class);
+            //coba fungsi try, jika gagal tampilkan catch
         try {
             control.destroy(data.getId());
             feedback = data.getJudul() + "deleted";
+            
         } catch (NonexistentEntityException error) {
             feedback = error.getMessage();
         }
