@@ -67,6 +67,21 @@ public class MyController {
             return feedback;
         
     }
+    //membuat method delete
+    @DeleteMapping(value = "/DELETE", consumes = APPLICATION_JSON_VALUE)
+    public String deleteData(HttpEntity<String> datasend) throws JsonProcessingException{
+        String feedback = "Do Nothing";
+            ObjectMapper mapper = new ObjectMapper();
+            data = mapper.readValue(datasend.getBody(), Surat.class);
+        try {
+            control.destroy(data.getId());
+            feedback = data.getJudul() + "deleted";
+        } catch (NonexistentEntityException error) {
+            feedback = error.getMessage();
+        }
+            return feedback;
+        
+    }
     
     
     
