@@ -28,17 +28,17 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @ResponseBody
 public class MyController {
-    
+    //deklarasi import Surat dan SuratJpaController
     Surat data = new Surat();
     SuratJpaController control = new SuratJpaController();
-    
+    //membuat method get
     @GetMapping(value="/GET", produces = APPLICATION_JSON_VALUE)
     public List<Surat> getData(){
         List<Surat> buffer = new ArrayList<>();
         buffer = control.findSuratEntities();
         return buffer;
     }
-    
+    //membuat method post
      @PostMapping(value = "/POST", consumes = APPLICATION_JSON_VALUE)
     public String sendData(HttpEntity<String> datasend) throws JsonProcessingException{
         String feedback = "Do Nothing";
@@ -51,9 +51,22 @@ public class MyController {
             feedback = error.getMessage();
         }
             return feedback;
+    //membuat method put    
+    }
+    @PutMapping(value = "/PUT", consumes = APPLICATION_JSON_VALUE)
+    public String editData(HttpEntity<String> datasend) throws JsonProcessingException{
+        String feedback = "Do Nothing";
+            ObjectMapper mapper = new ObjectMapper();
+            data = mapper.readValue(datasend.getBody(), Surat.class);
+        try {
+            control.edit(data);
+            feedback = data.getJudul() + "Edited";
+        } catch (Exception error) {
+            feedback = error.getMessage();
+        }
+            return feedback;
         
     }
-    
     
     
     
