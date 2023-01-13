@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>Surat</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script>
+            function get(){
+                let view = document.getElementById("view");
+                
+                $.ajax({
+                   url: 'http://localhost:8080/GET',
+                   dataType: 'text',
+                   success: function(result){
+                       view.innerHTML = result;
+                   }
+                })
+            }
+            function post(){
+                let view = document.getElementById("view");
+                let ID = document.getElementById("ID").value;
+                let NO_SURAT = document.getElementById("NO_SURAT").value;
+                let JUDUL = document.getElementById("JUDUL").value;
+                let TEMBUSAN = document.getElementById("TEMBUSAN").value;                
+                let json = {"ID":ID, "NO_SURAT":NO_SURAT, "JUDUL":JUDUL, "TEMBUSAN":TEMBUSAN};
+                let obj = JSON.stringify(json);
+                
+                $.ajax({
+                   url: 'http://localhost:8080/POST',
+                   data:obj,
+                   method: 'POST',
+                   contentType: 'application/json',
+                   dataType: 'text',
+                   success: function(result){
+                       view.innerHTML = result;
+                   }
+                })
+            }
+            function put(){
+               let view = document.getElementById("view");
+                let ID = document.getElementById("ID").value;
+                let NO_SURAT = document.getElementById("NO_SURAT").value;
+                let JUDUL = document.getElementById("JUDUL").value;
+                let TEMBUSAN = document.getElementById("TEMBUSAN").value;                
+                let json = {"ID":ID, "NO_SURAT":NO_SURAT, "JUDUL":JUDUL, "TEMBUSAN":TEMBUSAN};
+                let obj = JSON.stringify(json);
+                
+                $.ajax({
+                   url: 'http://localhost:8080/PUT',
+                   data:obj,
+                   method: 'PUT',
+                   contentType: 'application/json',
+                   dataType: 'text',
+                   success: function(result){
+                       view.innerHTML = result;
+                   }
+                })
+            }
+            function del(){
+                let id = document.getElementById("ID").value;
+                let json = { id: ID };
+                let  JUDUL= document.getElementById("JUDUL").value;
+                let obj = JSON.stringify(json);
+                
+                $.ajax({
+                   url: 'http://localhost:8080/DELETE',
+                   data:obj,
+                   method: 'DELETE',
+                   contentType: 'application/json',
+                   dataType: 'text',
+                   success: function(result){
+                       view.innerHTML = result;
+                   }
+                })
+            }
+            
+            
+        </script>
+    </head>
+    <body>
+        <div>SURAT</div>
+        <input type="text" id="ID" name="ID">
+        <input type="text" id="NO_SURAT" name="NO_SURAT">
+        <input type="text" id="JUDUL" name="JUDUL">
+        <input type="text" id="TEMBUSAN" name="TEMBUSAN">
+        <input type="file" id="FILE" name="FILE">
+        
+        <br>
+        <button onclick="get()">GET</button>
+        <button onclick="post()">POST</button>
+        <button onclick="put()">PUT</button>
+        <button onclick="del()">DELETE</button>
+        <br><br>
+        <div id="view">
+        
+        
+    </body>
+</html>
